@@ -21,13 +21,13 @@ public class Principal {
 
     public void exibeMenu() {
         var menu = """
-               *** OPÇÕES ***
-               Carro
-               Moto
-               Caminhão
-               
-               Digite uma das opções para consulta: 
-               """;
+                *** OPÇÕES ***
+                Carro
+                Moto
+                Caminhão
+                               
+                Digite uma das opções para consulta: 
+                """;
 
         System.out.println(menu);
         var opcao = leitura.nextLine();
@@ -37,9 +37,9 @@ public class Principal {
             endereco = URL_BASE + "carros/marcas";
         } else if (opcao.toLowerCase().contains("mot")) {
             endereco = URL_BASE + "motos/marcas";
-        } else if (opcao.toLowerCase().contains("caminh")){
+        } else if (opcao.toLowerCase().contains("caminh")) {
             endereco = URL_BASE + "caminhoes/marcas";
-        } else{
+        } else {
             System.out.println("Tipo de veiculo inválido");
         }
         BuscarMarca(endereco);
@@ -53,7 +53,7 @@ public class Principal {
         ListarValores(endereco, Integer.valueOf(codigoModelo), Integer.valueOf(codigoMarca));
     }
 
-    public void BuscarMarca (String endereco) {
+    public void BuscarMarca(String endereco) {
         var json = consumo.obterDados(endereco);
         System.out.println(json);
         var marcas = conversor.obterLista(json, Dados.class);
@@ -62,7 +62,7 @@ public class Principal {
                 .forEach(System.out::println);
     }
 
-    public void ListarModelos(String endereco, Integer codigoMarca){
+    public void ListarModelos(String endereco, Integer codigoMarca) {
         endereco = endereco + "/" + codigoMarca + "/modelos";
         var json = consumo.obterDados(endereco);
         var modeloLista = conversor.obterDados(json, Modelos.class);
@@ -84,8 +84,8 @@ public class Principal {
 
     }
 
-    public void ListarValores(String endereco, Integer codigoModelo, Integer codigoMarca){
-        endereco = endereco + "/" +codigoMarca+"/modelos/"+ codigoModelo + "/anos";
+    public void ListarValores(String endereco, Integer codigoModelo, Integer codigoMarca) {
+        endereco = endereco + "/" + codigoMarca + "/modelos/" + codigoModelo + "/anos";
         var json = consumo.obterDados(endereco);
         List<Dados> anos = conversor.obterLista(json, Dados.class);
         List<Veiculo> veiculos = new ArrayList<>();
